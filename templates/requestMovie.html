@@ -1,0 +1,212 @@
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--       CISP 74 CRUD Web App Using Flask and Python Group Project    -->
+<!--               by Julian Arteaga and Yvette Vargas                  -->
+<!--                    Professor Sohair Zaki                           -->
+<!--                      November 27, 2022                             -->
+<!--                      requestMovie.html                             -->
+<!--____________________________________________________________________-->
+
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--                         Description:                               -->
+<!--  The first page the user encounters upon after logging in. This    -->
+<!--  page displays the request table of all movie requests made to     -->
+<!--  the website alongside the request form to make the user's own     -->
+<!--  request for movies to be audio described.                         -->
+<!--____________________________________________________________________-->
+
+<!-- jinja block that extends base.html page -->
+{% extends "base.html"%}
+{% block content %}
+
+<!-- styling for the Requests database table and card for the request form-->
+<style>
+  /* styles for the card of the request form */
+  .card {
+    margin: 25px 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Stylings for the table that displays the user's past movie requests */
+  .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0px;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Style for each heading and their row for table */
+  .styled-table thead tr {
+    background-color: #007298;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  /* style for each header cell and data cell for the table  */
+  .styled-table th, td {
+    padding: 12px 15px;
+  }
+
+  /* style for the body and their row of the table */
+  .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  /* style for every other row of the body of the table */
+  .styled-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+      font-weight: bold;
+      color: #007298;
+  }
+
+  /* style for the very last row of the body of the table */
+  .styled-table tbody tr:last-of-type {
+      border-bottom: 2px solid #007298;
+  }
+</style>
+
+  <br>
+  <!-- container for all the content of the page, centers text  -->
+  <div class="container text-center" id="RequestPage">
+    <!-- Row to display requests table and request form next to each other -->
+    <div class="row">
+      <!-- Column for requests table, limits its size -->
+        <div class="col-lg justify-content-center" id="Database">
+          <h2>Current Requests</h2>
+          <!-- div for requests table that centers it -->
+          <div style="display: flex; justify-content: center;">
+            <table class="styled-table">
+              <!-- table headings -->
+              <thead>
+                <td>Title</td>
+                <td>Director</td>
+                <td>Year</td>
+                <td>Genre</td>
+                <td>Subtitles?</td>
+                <td>Status</td>
+              </thead>
+              <!-- body of the past requests table -->
+              <tbody>
+                <!-- jinja for loop that displays each row in the requests database -->
+                {% for row in rows %}
+                <!-- data for the requests table -->
+                <tr>
+                  <td>{{row["title"]}}</td>
+                  <td>{{row["director"]}}</td>
+                  <td>{{row["year"]}}</td>
+                  <td>{{row["genre"]}}</td>
+                  <td>{{row["subtitle"]}}</td>
+                  <td>{{row["status"]}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      
+      <!-- Column for request form and limits its size -->
+      <div class="col-lg" id="RequestForm">
+        <h2>Request Form</h2>
+        <!-- Card for the request form, makes a rounded boarder -->
+        <div class="card">
+          <!-- div for card's body -->
+          <div class="card-body">
+            <!-- request form that takes info and sends it to /saverequest in application.py -->
+            <form action="/saverequest" method="POST">
+
+              <!-- Row to display Title and Director inputs next to each other -->
+              <div class="row">
+                <!-- Column for Title which displays Title label and input field on top of each other -->
+                <div class="col">
+                  <label for="title">Title</label>
+                  <!-- form-control for title input -->
+                  <div class="mb-3">
+                    <input type="text" id="title" name="title" class="form-control" required>
+                  </div>
+                </div>
+                <!-- Column for Director which displays Director label and input field on top of each other -->
+                <div class="col">
+                  <label for="director">Director</label>
+                  <!-- form-control for director input -->
+                  <div class="mb-3">
+                    <input type="text" id="director" name="director" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row to display Year, Genre and Subtitles inputs next to each other -->
+              <div class="row align-items-center">
+                <!-- Column for Year which displays Year label and input field on top of each other, also limits size -->
+                <div class="col-md-3">
+                  <label for="Year">Year</label>
+                  <!-- form-control for year input -->
+                  <div class="mb-3">
+                    <input type="number" id="Year" name="Year" class="form-control" required min="1900" max="2022" placeholder="2022">
+                  </div>
+                </div>
+                <!-- Column for Genre which displays Genre label and input field on top of each other, also limits size -->
+                <div class="col-md-6">
+                  <label for="genre">Genre</label>
+                  <!-- input group for options label and genre select input field -->
+                  <div class="input-group mb-3">
+                    <label for="genre" class="input-group-text">Options</label>
+                    <!-- Selection for genre with dropdown that has options for each possible genre -->
+                    <select name="genre" id="genre" class="form-select" required>
+                      <option selected>Choose...</option>
+                      <option value="Action">Action</option>
+                      <option value="Adventure">Adventure</option>
+                      <option value="Drama">Drama</option>
+                      <option value="Comedy">Comedy</option>
+                      <option value="Horror">Horror</option>
+                      <option value="Thriller">Thriller</option>
+                      <option value="Fantasy">Fantasy</option>
+                      <option value="Romance">Romance</option>
+                      <option value="Musical">Musical</option>
+                      <option value="Science Fiction">Science Fiction</option>
+                      <option value="Documentary">Documentary</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- Column for Subtitles which displays Subtitles label and radio buttons on top of each other, also limits size -->
+                <div class="col-md-3">
+                  <label for="subtitle">Require Subtitles?</label>
+                  <!-- form-control for subtitles radio button input -->
+                  <div class="mb-3">
+                    <!-- puts Yes radio button inline with other radio button -->
+                    <div class="form-check form-check-inline">
+                      <input type="radio" id="subYes" name="subtitle" value="YES" class="form-check-input" checked>
+                      <label for="subYes" class="form-check-label">Yes</label>
+                    </div>
+                    <!-- puts No radio button inline with other radio button -->
+                    <div class="form-check form-check-inline">
+                      <input type="radio" id="subNo" name="subtitle" class="form-check-input" value="NO">
+                      <label for="subNo" class="form-check-label">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row to display Purpose input in a row all by itself -->
+              <div class="row">
+                <!-- Column for Purpose which displays Purpose label and textarea on top of each other -->
+                <div class="col">
+                  <!-- form-control for purpose label and and purpose textarea -->
+                  <div class="mb-3">
+                    <label for="purpose">What is the purpose for requesting this movie?</label><br>
+                    <textarea class="form-control" name="purpose" id="purpose" cols="50" rows="5" placeholder="i.e. for school, someone else's behalf, etc."></textarea>
+                  </div>
+                </div>
+              </div>
+              <!-- Submit button with primary button color -->
+              <input type="submit" class="btn btn-primary" value="Submit" id="submit">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

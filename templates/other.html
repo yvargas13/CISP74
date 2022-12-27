@@ -1,0 +1,27 @@
+
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--       CISP 74 CRUD Web App Using Flask and Python Group Project    -->
+<!--               by Julian Arteaga and Yvette Vargas                  -->
+<!--                    Professor Sohair Zaki                           -->
+<!--                      November 27, 2022                             -->
+<!--                         other.html                                 -->
+<!--____________________________________________________________________-->
+
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--                         Description:                               -->
+<!--  This page served mostly for debugging purposes, to let us know    -->
+<!--  what message came through and to fall back on if errors occured.  -->
+<!--  Users should never see this page.                                 -->
+<!--____________________________________________________________________-->
+
+<!-- mainly served as a debug page to fall back on in case any errors happened -->
+<!-- jinja block that extends base.html page -->
+{% extends "base.html"%}
+{% block content %}
+<!-- Shows the message from doing tasks in application.py, lets us know what happened -->
+<br> <h1>{{msg}}</h1><br><br>
+<!-- link to go back to index -->
+<a href="/">Home</a>
+{% endblock %}

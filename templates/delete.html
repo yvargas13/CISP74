@@ -1,0 +1,34 @@
+
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--       CISP 74 CRUD Web App Using Flask and Python Group Project    -->
+<!--               by Julian Arteaga and Yvette Vargas                  -->
+<!--                    Professor Sohair Zaki                           -->
+<!--                      November 27, 2022                             -->
+<!--                         delete.html                                -->
+<!--____________________________________________________________________-->
+
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--                         Description:                               -->
+<!--  Asks the user if they really want to delete their profile. Gives  -->
+<!--  the user the choice to go back to their profile or to delete for  -->
+<!--  good.                                                             -->
+<!--____________________________________________________________________-->
+
+<!-- jinja extends from base.html -->
+{% extends "base.html"%}
+{% block content %}
+<!-- Container to center contents and text -->
+<div class="container text-center" style="margin-top: 2rem;">
+    <div class="col">
+        <!-- Message for deletion question -->
+        <p>Are you sure you want to <strong>delete</strong> your profile?</p>
+        <p>If not, go back to your profile please</p>
+        <!-- Links to go back to profile page or to permanently delete their account -->
+        <a href="/profile" class="btn btn-primary" style="margin-left: 20px;">Go back</a>
+        <a href="/deleteUser" class="btn btn-danger" style="margin-left: 20px;">Delete </a>
+    </div>
+</div>
+
+{% endblock %}

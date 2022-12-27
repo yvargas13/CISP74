@@ -1,0 +1,170 @@
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--       CISP 74 CRUD Web App Using Flask and Python Group Project    -->
+<!--               by Julian Arteaga and Yvette Vargas                  -->
+<!--                    Professor Sohair Zaki                           -->
+<!--                      November 27, 2022                             -->
+<!--                         update.html                                -->
+<!--____________________________________________________________________-->
+
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--                         Description:                               -->
+<!--  The update page for users to update their infomation. Autofills   -->
+<!--  the form with existing info on the user's account to make it      -->
+<!--  easier to update only specific parts of their profile.            -->
+<!--____________________________________________________________________-->
+
+<!-- jinja block that extends base.html page -->
+{% extends "base.html"%}
+{% block content %}
+
+<!-- container for all the content of the page, centers text and adds padding on top and bottom -->
+<div class="container text-center justify-content-center" style="padding-top: 2rem; padding-bottom: 2rem;">
+    <h1>Update your Personal information</h1>
+    <!-- column for update form that centers it -->
+    <div class="col d-flex justify-content-center">
+        <!-- update form for user to update their info, shows them their existing info on their account -->
+        <form action="/updateUser" method="POST" autocomplete="off">
+
+            <!-- container within form for user personal info  -->
+            <div class="container">
+                <!-- row for personal info update form that displays first name, middle name, last name, DOB, and email on one side and gender identity on the other -->
+                <div class="row">
+                    <!-- Column for first name, middle name, last name, DOB, and email inputs -->
+                    <div class="col">
+                        <!-- Row which makes each input group as rows for this column -->
+                        <div class="row" style="padding-top: 10px;">
+                            <!-- input group for the first name label and input, autofills with existing first name on user's account -->
+                            <div class="input-group mb-3">
+                                <label for="first" class="col-sm-2 col-form-label">First Name </label>
+                                <input type="text" class="form-control" id="first" name="first" value="{{account['first']}}" required>
+                            </div>
+                            <!-- input group for the middle name label and input, autofills with existing middle name on user's account -->
+                            <div class="input-group mb-3">
+                                <label for="middle" class="col-sm-2 col-form-label">Middle Name </label>
+                                <input type="text" class="form-control" id="middle" name="middle" value="{{account['middle']}}">
+                            </div>
+                            <!-- input group for the last name label and input, autofills with existing last name on user's account -->
+                            <div class="input-group mb-3">
+                                <label for="last" class="col-sm-2 col-form-label">Last Name </label>
+                                <input type="text" class="form-control" name="last" id="last" value="{{account['last']}}" required>
+                            </div>
+                            <!-- input group for the date of birth label and input, autofills with existing date of birth on user's account -->
+                            <div class="input-group mb-3">
+                                <label for="DOB" class="col-sm-2 col-form-label">Date of Birth </label>
+                                <input type="date" class="form-control" name="DOB" id="DOB" value="{{account['DOB']}}" required>
+                            </div>
+                            <!-- input group for the email label and input, autofills with existing email on user's account -->
+                            <div class="input-group mb-3">
+                                <label for="email" class="col-sm-2 col-form-label">Email </label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{account['email']}}" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column just for Gender Identity -->
+                    <div class="col">
+                        <!-- Row for gender identity which makes each gender option as rows for this column  -->
+                        <div class="row">
+                            <label for="gender">Gender Identity</label>
+                            <!-- form-control where the text is align-left -->
+                            <div class="mb-3 text-start">
+                                <!-- input group for the radio button and Male gender option -->
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <input type="radio" class="form-check-input mt-0" name="gender" id="genderM" value="Male" required>
+                                    </div>
+                                    <!-- Value for Male and is read only, acts as a label -->
+                                    <input type="text" class="form-control" value="Male" readonly>
+                                </div>
+                                <!-- input group for the radio button and Female gender option -->
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <input type="radio" class="form-check-input mt-0" name="gender" id="genderF" value="Female" required>
+                                    </div>
+                                    <!-- Value for Female and is read only, acts as a label -->
+                                    <input type="text" class="form-control" value="Female" readonly>
+                                </div>
+                                <!-- input group for the radio button and Nonbinary gender option -->
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <input type="radio" class="form-check-input mt-0" name="gender" id="genderNB" value="Nonbinary" required>
+                                    </div>
+                                    <!-- Value for Nonbinary and is read only, acts as a label -->
+                                    <input type="text" class="form-control" value="Nonbinary" readonly>
+                                </div>
+                                <!-- input group for the radio button and Transgender option -->
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <input type="radio" class="form-check-input mt-0" name="gender" id="genderT" value="Transgender" required>
+                                    </div>
+                                    <!-- Value for Transgender and is read only, acts as a label -->
+                                    <input type="text" class="form-control" value="Transgender" readonly>
+                                </div>
+                                <!-- input group for the radio button and Prefer not to say option -->
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <input type="radio" class="form-check-input mt-0" name="gender" id="genderU" value="Not to say" required>
+                                    </div>
+                                    <!-- Value for Prefer not to say and is read only, acts as a label -->
+                                    <input type="text" class="form-control" value="Prefer not to say" readonly>
+                                </div>
+                                <!-- input group for the radio button and Other gender option -->
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <input type="radio" class="form-check-input mt-0" name="gender" value="Other" id ="genderO" checked>
+                                    </div>
+                                    <!-- Value for Other and is read only, acts as a label -->
+                                    <input type="text" class="form-control" value="Other" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <!-- column for username and password section, centers it -->
+            <div class="col d-flex justify-content-center">
+                <!-- Limits size of column -->
+                <div class="col-5">
+                    <h2> Username and Password</h2>
+                    <!-- row and form-control for username and input field, autofills with existing username on user's account -->
+                    <div class="row mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="username" class="form-control" id="username" name="username" value="{{account['username']}}" required minlength="6" maxlength="30">
+                    </div>
+                    <!-- row and form-control for password and input field, does not autofill for privacy -->
+                    <div class="row mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}"
+                            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters">
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <!-- Column for Disability section, centers it -->
+            <div class="col d-flex justify-content-center">
+                <!-- Limits size of column -->
+                <div class="col-6">
+                    <h2> Disability Identification</h2>
+                    <label for="disability" class="form-label">Disability</label>
+                    <div>
+                        <!-- Text area for user to input what their disability is, autofills with existing disability on user's account -->
+                        <textarea class="form-control" id="disability" name="disability" rows="4" cols="50" minlength="10">{{account['disability']}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <!-- Update button, with primary color -->
+            <input type="submit" class="btn btn-primary" value="Update">
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

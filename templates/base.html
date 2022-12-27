@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--       CISP 74 CRUD Web App Using Flask and Python Group Project    -->
+<!--               by Julian Arteaga and Yvette Vargas                  -->
+<!--                    Professor Sohair Zaki                           -->
+<!--                      November 27, 2022                             -->
+<!--                          base.html                                 -->
+<!--____________________________________________________________________-->
+
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--                         Description:                               -->
+<!--  Acts as the main template for each page within the website as     -->
+<!--  the header and footer. Main content for each page to be found     -->
+<!--  within jinja block content.                                       -->
+<!--____________________________________________________________________-->
+
+
+
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Diegetic</title>
+    <!-- links to bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- style for certain parts of page -->
+    <style>
+      /* style for whole entire page */
+      #page-container {
+        position: relative;
+        min-height: 100vh;
+      }
+      /* style for main content of the page */
+      #content-wrap {
+        padding-bottom: 6.5rem;
+      }
+      /* style for footer of the page */
+      #footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 6rem;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <!-- div for whole page -->
+    <div id="page-container">
+      <!-- div for main content on page -->
+      <div id="content-wrap">
+        <!-- div for navbar and makes it stick to the top of page -->
+        <div class="sticky-top">
+          <!-- makes navbar dark and horizontal -->
+          <nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between" style="--bs-navbar-padding-x: 0.5rem">
+            <!-- Logo with site title -->
+            <a class="navbar-brand" href="#"><img src="./static/icon.jpg" alt="Diegetic Logo" style="width: 120px;" class="rounded"> Diegetic</a>
+            <!-- nav for website -->
+            <div class="navbar-nav">
+              <!-- goes to requests page -->
+              <li class="nav-item"><a href="/requestMovie" class="nav-link">Request</a></li>
+              <!-- goes to profile page -->
+              <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+              <!-- logs out of website -->
+              <li class="nav-item"><a href="/logoff" class="nav-link">Logout</a></li>
+            </div>
+          </nav>
+        </div>
+
+        <!-- jinja block content for each page -->
+        {% block content %}
+        {% endblock %}
+
+      </div>
+
+      <!-- footer for each page, displays contact info -->
+      <!-- Makes footer content dark with white text and last thing on page -->
+      <footer class="justify-content-center bottom text-center text-bg-dark p-3" style="margin: 0" id="footer">
+        <h4>Contact Info</h4>
+        <div class="container">
+          <!-- displays as a row -->
+          <div class="row">
+            <!-- contact phone -->
+            <div class="col">Phone: (888) 888-8888</div>
+            <!-- contact email -->
+            <div class="col">Email: contact@diegetic.com</div>
+            <!-- contact location -->
+            <div class="col">Location: Walnut, California</div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </body>
+  
+  
+
+</html>

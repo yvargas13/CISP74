@@ -1,0 +1,164 @@
+
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--       CISP 74 CRUD Web App Using Flask and Python Group Project    -->
+<!--               by Julian Arteaga and Yvette Vargas                  -->
+<!--                    Professor Sohair Zaki                           -->
+<!--                      November 27, 2022                             -->
+<!--                         profile.html                               -->
+<!--____________________________________________________________________-->
+
+<!--____________________________________________________________________-->
+<!--                                                                    -->
+<!--                         Description:                               -->
+<!--  The user's profile page displays the user's info and past movie   -->
+<!--  requests in two tables. Allows the user to update or delete       -->
+<!--  their account as well.                                            -->
+<!--____________________________________________________________________-->
+
+<!-- jinja block that extends base.html page -->
+{% extends "base.html"%}
+{% block content %}
+<!-- Since this page required more CSS, made a section specifically for that -->
+<style>
+	/* Stylings for the table that displays the user's past movie requests */
+	.styled-table {
+		border-collapse: collapse;
+		margin: 25px 0;
+		font-size: 0.9em;
+		font-family: sans-serif;
+		min-width: 400px;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	}
+
+	/* Style for each heading and their row for table */
+	.styled-table thead tr {
+		background-color: #007298;
+		color: #ffffff;
+		text-align: center;
+  	}
+
+	/* style for each header cell and data cell for the table  */
+  	.styled-table th, td {
+    	padding: 12px 15px;
+  	}
+
+	/* style for the body and their row of the table */
+  	.styled-table tbody tr {
+    	border-bottom: 1px solid #dddddd;
+	}
+
+	/* style for every other row of the body of the table */
+	.styled-table tbody tr:nth-of-type(even) {
+    	background-color: #f3f3f3;
+    	font-weight: bold;
+    	color: #007298;
+	}
+
+	/* style for the very last row of the body of the table */
+	.styled-table tbody tr:last-of-type {
+    	border-bottom: 2px solid #007298;
+	}
+</style>
+
+<!-- container for all of the content of the page, centers text -->
+<div class="container text-center">
+	<!-- Row to display user info and past movie requests table next to each other -->
+	<div class="row">
+	
+		<!-- Column for user info -->
+		<div class="col">
+			<h1>Profile Information</h1>
+			<!-- Table that displays the user's info -->
+			<table class="table table-bordered table-striped">
+				<tbody>
+					<!-- User's first name -->
+					<tr>
+						<th scope="row">First:</th>
+						<td>{{account['first']}}</td>
+					</tr>
+					<!-- User's middle name -->
+					<tr>
+						<th scope="row">Middle: </th>
+						<td>{{account['middle']}}</td>
+					</tr>
+					<!-- User's last name -->
+					<tr>
+						<th scope="row">Last: </th>
+						<td>{{account['last']}}</td>
+					</tr>
+					<!-- User's date of birth -->
+					<tr>
+						<th scope="row">Birthdate: </th>
+						<td>{{account['DOB']}}</td>
+					</tr>
+					<!-- User's username -->
+					<tr>
+						<th scope="row">Username: </th>
+						<td>{{ account['username'] }}</td>
+					</tr>
+					<!-- User's password, doesn't actually display password for privacy -->
+					<tr>
+						<th scope="row">Password:</th>
+						<td>***********</td>
+					</tr>
+					<!-- User's email -->
+					<tr>
+						<th scope="row">Email:</th>
+						<td>{{ account['email'] }}</td>
+					</tr>
+					<!-- User's gender -->
+					<tr>
+						<th scope="row">Gender:</th>
+						<td>{{ account['gender'] }}</td>
+					</tr>
+					<!-- User's disability -->
+					<tr>
+						<th scope="row">Disability:</th>
+						<td>{{ account['disability'] }}</td>
+					</tr>
+				</tbody>				
+			</table>
+			<!-- Buttons to update or delete account, adds margin spacing to keep them separate -->
+			<a href="/update" class="btn btn-primary" style="margin-right: 20px;">Update</a>
+			<a href="/delete" class="btn btn-danger" style="margin-left: 20px;">Delete</a>
+			<br>
+		</div>
+
+
+		<!-- Column for past requests table -->
+		<div class="col">
+			<h1>Past Requests</h1>
+			<!-- div for past requests table that centers it -->
+			<div style="display: flex; justify-content: center; align-items: center;">
+				<table class="styled-table">
+					<!-- table headings -->
+					<thead>
+					<td>Title</td>
+					<td>Director</td>
+					<td>Year</td>
+					<td>Genre</td>
+					<td>Subtitles?</td>
+					<td>Status</td>
+					</thead>
+					<!-- body of the past requests table -->
+					<tbody>
+						<!-- jinja for loop that displays each row in the requests database only made from the user -->
+						{% for row in rows %}
+						<!-- data for the past requests table -->
+						<tr>
+							<td>{{row["title"]}}</td>
+							<td>{{row["director"]}}</td>
+							<td>{{row["year"]}}</td>
+							<td>{{row["genre"]}}</td>
+							<td>{{row["subtitle"]}}</td>
+							<td>{{row["status"]}}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
